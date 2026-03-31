@@ -1,4 +1,7 @@
+<h1>Your Expenses</h1>
+
 {% for expense in expenses %}
+    <hr>
     <p>Title: {{ expense.title }}</p>
     <p>Description: {{ expense.description }}</p>
     <p>Amount: {{ expense.amount }}</p>
@@ -6,7 +9,11 @@
     <p>Date: {{ expense.created_date }}</p>
     <p>Last modified: {{ expense.last_modified }}</p>
     <hr>
-    <a href="{% url 'expenses:edit' expense.id %}">Edit</a>
-    <a href="{% url 'expenses:delete' expense.id %}">Delete</a>
+
+    <p>
+        <a href="{% url 'expenses:edit' expense.id %}">Edit</a>
+        <a href="{% url 'expenses:delete' expense.id %}">Delete</a>
+    </p>
+
     <hr>
 {% endfor %}
