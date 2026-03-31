@@ -1,8 +1,11 @@
-from django.contrib import admin
-from django.urls import path, include
-from . import views
+from django.urls import path
+from .views import ExpenseListView, ExpenseCreateView, ExpenseUpdateView, ExpenseDeleteView
+
+app_name = 'expenses'
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    
+    path('', ExpenseListView.as_view(), name='list'),
+    path('create/', ExpenseCreateView.as_view(), name='create'),
+    path('<int:pk>/update/', ExpenseUpdateView.as_view(), name='update'),
+    path('<int:pk>/delete/', ExpenseDeleteView.as_view(), name='delete'),
 ]
