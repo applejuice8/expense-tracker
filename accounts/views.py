@@ -9,8 +9,8 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('home')
+            return redirect('expenses:list')
     else:
         form = UserCreationForm()
 
-    return render(request, 'registration/signup.html', {'form': form})
+    return render(request, 'accounts/signup.html', {'form': form})

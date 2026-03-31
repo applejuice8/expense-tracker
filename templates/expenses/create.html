@@ -1,6 +1,6 @@
 <h1>Add Expense</h1>
 
-<form action="{% url expenses:create %}" method="POST">
+<form action="{% url 'expenses:create' %}" method="POST">
     {% csrf_token %}
 
     <label for="title">Title:</label><br>

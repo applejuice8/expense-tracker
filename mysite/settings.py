@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'expenses'
+    'expenses',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -125,5 +126,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # Redirect URLs after login/logout
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = '/expenses/'
+LOGOUT_REDIRECT_URL = '/expenses/'
