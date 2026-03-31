@@ -19,13 +19,16 @@
         <hr>
 
         <p>
-            <a href="{% url 'expenses:edit' expense.id %}">Edit</a>
+            <a href="{% url 'expenses:update' expense.id %}">Edit</a>
             <a href="{% url 'expenses:delete' expense.id %}">Delete</a>
         </p>
 
         <hr>
     {% endfor %}
+
+    <a href="{% url 'expenses:create' %}">Create New</a>
+
 {% else %}
 	<a href="{% url 'login' %}">Login</a>
-	<a href="{% url 'signup' %}">Signup</a>
+	<a href="{% url 'accounts:signup' %}">Signup</a>
 {% endif %}

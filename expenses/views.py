@@ -1,20 +1,45 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+from .models import Expense
+from .forms import ExpenseForm
 
 
-@login_required
-def index(request):
-    return render(request, 'expenses/index.html')
+class ExpenseListView(LoginRequiredMixin, ListView):
+    model = Expense
+    template_name = 'expenses/list.html'
+    context_object_name = 'expenses'
 
-@login_required
-def add(request):
-    return HttpResponse('add')
+    def get_queryset(self):
+        return Expense.objects.filter(user=self.request.user)
 
-@login_required
-def edit(request, id: int):
-    return HttpResponse('edit')
 
-@login_required
-def delete(request, id: int):
-    return HttpResponse('delete')
+class ExpenseCreateView(LoginRequiredMixin, CreateView):
+    model = Expense
+    form_class = ExpenseForm
+    template_name = 'expenses/create.html'
+    success_url = reverse_lazy('expenses:list')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
+class ExpenseUpdateView(LoginRequiredMixin, UpdateView):
+    model = Expense
+    form_class = ExpenseForm
+    template_name = 'expenses/update.html'
+    success_url = reverse_lazy('expenses:list')
+
+    def get_queryset(self):
+        return Expense.objects.filter(user=self.request.user)
+
+
+class ExpenseDeleteView(LoginRequiredMixin, DeleteView):
+    model = Expense
+    template_name = 'expenses/delete.html'
+    success_url = reverse_lazy('expenses:list')
+
+    def get_queryset(self):
+        return Expense.objects.filter(user=self.request.user)
