@@ -10,7 +10,6 @@ def signup(request):
             user = form.save()
             login(request, user)
             return redirect('expenses:list')
-    else:
-        form = UserCreationForm()
 
+    form = UserCreationForm()
     return render(request, 'accounts/signup.html', {'form': form})

@@ -6,6 +6,12 @@
 		<button type="submit">Log Out</button>
 	</form>
 
+    <a href="{% url 'password_change' %}">Change Password</a>
+
+    {% if user.is_superuser %}
+        <a href="{% url 'admin:index' %}">Enter Admin View</a>
+    {% endif %}
+
     <h1>Your Expenses</h1>
 
     {% for expense in expenses %}
@@ -17,12 +23,10 @@
         <p>Created at: {{ expense.created_at }}</p>
         <p>Last update: {{ expense.last_update }}</p>
         <hr>
-
         <p>
             <a href="{% url 'expenses:update' expense.id %}">Update</a>
             <a href="{% url 'expenses:delete' expense.id %}">Delete</a>
         </p>
-
         <hr>
     {% endfor %}
 
