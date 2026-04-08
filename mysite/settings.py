@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'expenses',
-    'accounts'
+    'accounts',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -128,3 +129,13 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Redirect URLs after login/logout
 LOGIN_REDIRECT_URL = '/expenses/'
 LOGOUT_REDIRECT_URL = '/expenses/'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+		'rest_framework.authentication.BasicAuthentication'
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
