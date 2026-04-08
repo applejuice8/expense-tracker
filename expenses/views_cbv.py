@@ -18,7 +18,7 @@ class ExpenseCreateView(LoginRequiredMixin, View):
             expense = form.save(commit=False)
             expense.user = request.user
             expense.save()
-            return redirect('expense:list')
+            return redirect('expenses:list')
 
         return render(request, 'expenses/form.html', {'form': form})
 
@@ -51,12 +51,21 @@ class ExpenseUpdateView(LoginRequiredMixin, View):
 
         if form.is_valid():
             form.save()
-            return redirect('expense:list')
+            return redirect('expenses:list')
 
         return render(request, 'expenses/update.html', {'form': form})
 
 
 class ExpenseDeleteView(LoginRequiredMixin, View):
+    def get(self, request, pk):
+        expense = get_object_or_404(
+            Expense,
+            pk=pk,
+            user=request.user
+        )
+
+        return render(request, 'expenses/delete.html', {'expense': expense})
+
     def post(self, request, pk):
         expense = get_object_or_404(
             Expense,
@@ -65,4 +74,4 @@ class ExpenseDeleteView(LoginRequiredMixin, View):
         )
 
         expense.delete()
-        return redirect('expense:list')
+        return redirect('expenses:list')
