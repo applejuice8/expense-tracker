@@ -1,0 +1,11 @@
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">
+        {% if form.instance.pk %}
+            Update Expense
+        {% else %}
+            Create Expense
+        {% endif %}
+    </button>
+</form>
