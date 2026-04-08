@@ -4,6 +4,8 @@ from .views import ExpenseListView, ExpenseCreateView, ExpenseUpdateView, Expens
 from rest_framework.routers import DefaultRouter
 from . import api_views
 
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
 router = DefaultRouter()
 router.register('expenses', api_views.ExpenseViewSet, basename='expenses')
 
@@ -17,4 +19,8 @@ urlpatterns = [
 
     # API
     path('api/', include(router.urls)),
+
+    # JWT
+    path('api/auth/login/', TokenObtainPairView.as_view()),
+    path('api/auth/refresh/', TokenRefreshView.as_view())
 ]
