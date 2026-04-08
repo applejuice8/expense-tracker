@@ -18,7 +18,7 @@ class ExpenseListView(LoginRequiredMixin, ListView):
 class ExpenseCreateView(LoginRequiredMixin, CreateView):
     model = Expense
     form_class = ExpenseForm
-    template_name = 'expenses/create.html'
+    template_name = 'expenses/create_update.html'
     success_url = reverse_lazy('expenses:list')
 
     def form_valid(self, form):
@@ -29,7 +29,7 @@ class ExpenseCreateView(LoginRequiredMixin, CreateView):
 class ExpenseUpdateView(LoginRequiredMixin, UpdateView):
     model = Expense
     form_class = ExpenseForm
-    template_name = 'expenses/update.html'
+    template_name = 'expenses/create_update.html'
     success_url = reverse_lazy('expenses:list')
 
     def get_queryset(self):
